@@ -1,7 +1,6 @@
 import React, {useState, useEffect, useMemo} from "react";
 import {Modal} from "antd";
 import _ from "lodash";
-import {GetServerSidePropsContext} from "next";
 import {_Crawl} from "@/stores/actions";
 import Loading from "@/components/Loading";
 import WrapSearchRaceResult from "@/components/WrapSearchRaceResult";
@@ -161,20 +160,6 @@ export function Home(props: any) {
             {contextHolder}
         </>
     )
-}
-
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-    let props = {
-        meta: {
-            key: 'home',
-            title: 'Home page - Race F1',
-            noindex: false,
-            nofollow: false,
-            description: 'Home page - Race F1',
-            robotsProps: {}
-        }
-    }
-    return {props}
 }
 
 const mapDispatchToProps = (dispatch: any) => {
