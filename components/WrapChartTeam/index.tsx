@@ -1,4 +1,5 @@
 import CanvasJSReact from '@/assets/canvasjs.react';
+import _ from "lodash";
 
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 

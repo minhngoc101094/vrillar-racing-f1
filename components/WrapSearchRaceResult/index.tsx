@@ -56,7 +56,7 @@ export const WrapSearchRaceResult = (props: Props) => {
 
     useEffect(() => {
         if (crawData && crawData.length > 0) {
-            let tmpListYear = [];
+            let tmpListYear:{}[] = [];
             crawData.forEach(val => {
                 tmpListYear.push({value: val.year, label: val.year});
             });
@@ -87,9 +87,9 @@ export const WrapSearchRaceResult = (props: Props) => {
             const itemYear = form.getFieldsValue(["itemYear"]).itemYear;
             const findData = _.find(crawData, obj => obj.year === itemYear);
             if (findData) {
-                let tmpListTeam = [];
-                let tmpListDriver = [];
-                let tmpListGrandPrix = [];
+                let tmpListTeam:{}[] = [];
+                let tmpListDriver:{}[] = [];
+                let tmpListGrandPrix:{}[] = [];
                 if (value === "race") {
                     if (findData.race_result && findData.race_result.length) {
                         findData.race_result.forEach(val => {

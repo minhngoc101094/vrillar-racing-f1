@@ -1,6 +1,7 @@
 import React, {useMemo} from "react";
 import _ from "lodash";
 import {Empty, Table} from 'antd';
+import type { ColumnsType } from 'antd/es/table';
 import WrapSkeletonTypeA from "@/components/WrapSkeletonTypeA";
 import dynamic from 'next/dynamic';
 import styles from "./styles.module.scss"
@@ -13,55 +14,55 @@ export interface Props {
     year: string
     radioType: string
     dataResult?: [{
+        key?: number
         grand_prix?: string
         date?: string
         winner?: string
         car?: string
-        laps: string
-        time: string,
-        pos: string,
-        driver: string,
-        nationality: string,
-        pts: string,
-        data: object
+        laps?: string
+        time?: string,
+        pos?: string,
+        driver?: string,
+        nationality?: string,
+        pts?: string
     }],
+}
+
+interface DataType {
+    
 }
 
 export const WrapRaceResult = (props: Props) => {
     const {loading, radioType, year, dataResult} = props;
 
-    const columnRaceResult = useMemo(() => {
+    const columnRaceResult: ColumnsType<DataType> = useMemo(() => {
         return [
             {
                 title: 'GRAND PRIX', dataIndex: 'grand_prix', key: 'grand_prix', width: '250px',
-                render: (grand_prix: string) => (<>
-                    <span className="fw-bold">{grand_prix}</span>
-                </>)
+                render: (grand_prix) => (<>
+                            <span className="fw-bold">{grand_prix}</span>
+                    </>),
             },
             {
                 title: 'DATE', dataIndex: 'date', key: 'date', width: '250px',
-                sorter: (a:any, b:any) => a.date > b.date
             },
             {
                 title: 'WINNER', dataIndex: 'winner', key: 'winner', width: '250px',
-                sorter: (a:any, b:any) => a.winner > b.winner
             },
             {
                 title: 'CAR', dataIndex: 'car', key: 'car', width: '250px',
-                sorter: (a:any, b:any) => a.car > b.car
             },
             {
                 title: 'LAPS', dataIndex: 'laps', key: 'laps', width: '250px',
-                sorter: (a:any, b:any) => a.laps > b.laps
             },
             {
                 title: 'TIME', dataIndex: 'time', key: 'time', width: '250px',
-                sorter: (a:any, b:any) => a.time > b.time
             }
-        ];
-    }, []);
-
-    const columnDriverStandings = useMemo(() => {
+        ]
+    },[])
+    
+    
+    const columnDriverStandings: ColumnsType<DataType> = useMemo(() => {
         return [
             {
                 title: 'POS', dataIndex: 'pos', key: 'pos', width: '250px',
@@ -71,24 +72,20 @@ export const WrapRaceResult = (props: Props) => {
             },
             {
                 title: 'DRIVER', dataIndex: 'driver', key: 'driver', width: '250px',
-                sorter: (a:any, b:any) => a.driver > b.driver
             },
             {
                 title: 'NATIONALITY', dataIndex: 'nationality', key: 'nationality', width: '250px',
-                sorter: (a:any, b:any) => a.nationality > b.nationality
             },
             {
                 title: 'CAR', dataIndex: 'car', key: 'car', width: '250px',
-                sorter: (a:any, b:any) => a.car > b.car
             },
             {
                 title: 'PTS', dataIndex: 'pts', key: 'pts', width: '250px',
-                sorter: (a:any, b:any) => a.pts > b.pts
             }
         ];
     }, []);
 
-    const columnTeamStandings = useMemo(() => {
+    const columnTeamStandings: ColumnsType<DataType> = useMemo(() => {
         return [
             {
                 title: 'POS', dataIndex: 'pos', key: 'pos', width: '250px',
@@ -98,11 +95,9 @@ export const WrapRaceResult = (props: Props) => {
             },
             {
                 title: 'TEAM', dataIndex: 'car', key: 'car', width: '800px',
-                sorter: (a:any, b:any) => a.car > b.car
             },
             {
                 title: 'PTS', dataIndex: 'pts', key: 'pts', width: '250px',
-                sorter: (a:any, b:any) => a.pts > b.pts
             }
         ];
     }, []);

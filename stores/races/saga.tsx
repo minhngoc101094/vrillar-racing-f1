@@ -4,7 +4,7 @@ import {
 import {put, call, takeLatest} from "redux-saga/effects";
 import axios from 'axios';
 
-function* crawlSaga(action: any) {
+function* crawlSaga(action: any):any {
     try {
         const response = yield call(axios.get, '/api/scrape');
         const scrapedData = response.data;

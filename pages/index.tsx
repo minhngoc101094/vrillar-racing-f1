@@ -26,7 +26,7 @@ export function Home(props: any) {
         _Crawl
     } = props;
 
-    const crawData = useSelector((state: RootState) => state.crawl);
+    const crawData = useSelector((state:any = RootState) => state.crawl);
 
 
     useEffect(() => {
@@ -102,12 +102,12 @@ export function Home(props: any) {
         setLoading(false);
     }
 
-    const yieldDataResult = useMemo(() => {
+    const yieldDataResult:any = useMemo(() => {
         if (dataResult.length > 0) {
             const temp: {
                 key: number, grand_prix: string, date: string, winner: string,
                 car: string, laps: string, time: string, pos: string, driver: string,
-                nationality: string, pts: string, data: object
+                nationality: string, pts: string
             }[] = [];
             dataResult.forEach((ft: any, indexFt : number) => {
                 temp.push({
@@ -122,8 +122,7 @@ export function Home(props: any) {
                     driver: ft.driver,
                     nationality: ft.nationality,
                     pts: ft.pts,
-                    data: ft
-                });
+                });               
             });
             return temp;
         } else {
