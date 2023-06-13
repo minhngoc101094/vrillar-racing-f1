@@ -12,7 +12,6 @@ function* crawlSaga(action: any):any {
             for (const ft of scrapedData.data) {
                 try {
                   const res = yield call(axios.get, '/api/scrape?year=' + ft.year);
-                  console.log(res.data);
                   ft.driver_standings = res.data.data.driver;
                   ft.team_standings = res.data.data.team;
                 } catch (error) {

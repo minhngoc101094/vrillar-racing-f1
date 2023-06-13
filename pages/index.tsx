@@ -18,7 +18,6 @@ export function Home(props: any) {
     const [radioType, setRadioType] = useState<string>("");
     const [year, setYear] = useState<string>("");
     const [dataResult, setDataResult] = useState<any>([]);
-    const [dataChart, setDataChart] = useState<any>([]);
 
     const [modal, contextHolder] = Modal.useModal();
     const {
@@ -91,16 +90,6 @@ export function Home(props: any) {
         setLoading(false);
     }
 
-    const onSearchGraphic = (values: any) => {
-        setLoading(true);
-        const year = values.itemYear ? values.itemYear.trim() : undefined;
-        const objYear = _.find(crawData, obj => obj.year === year);
-        if (objYear) {
-            setDataChart(objYear.driver_standings);
-        }
-        setLoading(false);
-    }
-
     const yieldDataResult:any = useMemo(() => {
         if (dataResult.length > 0) {
             const temp: {
@@ -140,7 +129,6 @@ export function Home(props: any) {
                             loading={loading}
                             crawData={crawData}
                             onSearchResult={onSearchResult}
-                            onSearchGraphic={onSearchGraphic}
                         />
                     </div>
                     <div className={styles["wrapResultRace"]}>

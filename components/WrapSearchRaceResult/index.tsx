@@ -11,7 +11,6 @@ import styles from "./styles.module.scss"
 export interface Props {
     loading: boolean
     onSearchResult: (values: any) => void,
-    onSearchGraphic: (values: any) => void,
     crawData?: [{
         year?: string
         link?: string
