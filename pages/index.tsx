@@ -35,7 +35,7 @@ export function Home(props: any) {
             setLoading(true);
             _Crawl();
         }
-    }, [_Crawl]);
+    }, [_Crawl, crawData]);
 
     const onSearchResult = (values: any) => {
         setLoading(true);
