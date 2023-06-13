@@ -2,7 +2,6 @@ import React, {useMemo} from "react";
 import _ from "lodash";
 import {Empty, Table} from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import WrapSkeletonTypeA from "@/components/WrapSkeletonTypeA";
 import dynamic from 'next/dynamic';
 import styles from "./styles.module.scss"
 
@@ -103,9 +102,6 @@ export const WrapRaceResult = (props: Props) => {
     }, []);
 
     const yieldDataResult = useMemo(() => {
-        if (loading) {
-            return (<WrapSkeletonTypeA classDesc={styles["desc"]} classWrapItem={styles["wrapItem"]} quantity={15}/>);
-        }
         if (dataResult && dataResult.length) {
             return (
                 <Table

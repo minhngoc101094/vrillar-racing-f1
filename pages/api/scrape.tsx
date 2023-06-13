@@ -1,4 +1,5 @@
 import {URL_RESULT} from "@/fetches/config";
+import { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
 import cheerio from 'cheerio';
 
@@ -106,29 +107,44 @@ const parseHTML = async (html: string) => {
     });
 
     /*----------------------------------RACE RESULT------------------------------------*/
-    if (tmpYear.length > 0) {
-        for (let i = 0; i < tmpYear.length; i++) {
-            const urlDriver = `${URL_RESULT}/${tmpYear[i].year}/drivers.html`;
-            const dataDriver = await getDataDriver(urlDriver);
-            if (dataDriver) {
-                tmpYear[i].driver_standings = dataDriver;
-            }
+    // if (tmpYear.length > 0) {
+    //     for (let i = 0; i < tmpYear.length; i++) {
+    //         const urlDriver = `${URL_RESULT}/${tmpYear[i].year}/drivers.html`;
+    //         const dataDriver = await getDataDriver(urlDriver);
+    //         if (dataDriver) {
+    //             tmpYear[i].driver_standings = dataDriver;
+    //         }
 
-            const urlTeam = `${URL_RESULT}/${tmpYear[i].year}/team.html`;
-            const dataTeam = await getDataTeam(urlTeam);
-            if (dataTeam) {
-                tmpYear[i].team_standings = dataTeam;
-            }
-        }
-    }
+    //         const urlTeam = `${URL_RESULT}/${tmpYear[i].year}/team.html`;
+    //         const dataTeam = await getDataTeam(urlTeam);
+    //         if (dataTeam) {
+    //             tmpYear[i].team_standings = dataTeam;
+    //         }
+    //     }
+    // }
+    
     return tmpYear;
 
 }
 
-export default async (req: any, res: any) => {
+export  default async (req: NextApiRequest, res: NextApiResponse) => {
     try {
-        const html = await fetchHTML(URL_RESULT);
-        const resData = await parseHTML(html);
+        const { year } = req.query;
+        let resData: any;
+        console.log(year);
+        if(year){
+            resData = {};
+            const urlDriver = `${URL_RESULT}/${year}/drivers.html`;
+            const dataDriver = await getDataDriver(urlDriver);
+            resData.driver = dataDriver;
+            const urlTeam = `${URL_RESULT}/${year}/team.html`;
+            const dataTeam = await getDataTeam(urlTeam);
+            resData.team = dataTeam;
+        }else{
+            const html = await fetchHTML(URL_RESULT);
+            resData = await parseHTML(html);
+        }
+        
         res.status(200).json({data: resData});
     } catch (error) {
         res.status(500).json({error: 'An error occurred'});

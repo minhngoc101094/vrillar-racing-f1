@@ -29,13 +29,14 @@ export function Home(props: any) {
 
 
     useEffect(() => {
-        if (crawData && crawData.length > 0) {
-            setLoading(false);
-        } else {
-            setLoading(true);
-            _Crawl();
-        }
-    }, [crawData, _Crawl]);
+        // if (crawData && crawData.length > 0) {
+        //     setLoading(false);
+        // } else {
+        //     setLoading(true);
+        //     _Crawl();
+        // }
+        _Crawl();
+    }, [_Crawl]);
 
     const onSearchResult = (values: any) => {
         setLoading(true);

@@ -3,5 +3,6 @@ declare namespace NodeJS {
         readonly NEXT_PUBLIC_API_URL: string
         readonly NEXT_PUBLIC_API_KEY: string
         readonly NEXT_PUBLIC_APP_ENV: string
+        readonly NEXT_PUBLIC_URL_RESULT: string
     }
 }
